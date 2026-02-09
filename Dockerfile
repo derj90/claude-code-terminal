@@ -1,28 +1,23 @@
 FROM node:20-alpine
 
+# Install dependencies needed for node-pty
 RUN apk add --no-cache \
     bash \
-    curl \
-    git \
-    openssh-client \
     python3 \
     make \
     g++ \
-    linux-headers \
-    udev
+    linux-headers
 
 WORKDIR /app
 
+# Copy package files
 COPY package*.json ./
-RUN npm ci --only=production
 
+# Install npm dependencies including node-pty
+RUN npm install --production
+
+# Copy application code
 COPY . .
-
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S nodejs -u 1001 && \
-    chown -R nodejs:nodejs /app
-
-USER nodejs
 
 EXPOSE 3001
 
