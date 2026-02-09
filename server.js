@@ -33,11 +33,14 @@ wss.on('connection', (ws) => {
     name: 'xterm-256color',
     cols: 80,
     rows: 30,
-    cwd: process.env.HOME || '/app',
+    cwd: '/home/claude',
     env: {
       ...process.env,
       TERM: 'xterm-256color',
-      COLORTERM: 'truecolor'
+      COLORTERM: 'truecolor',
+      HOME: '/home/claude',
+      USER: 'claude',
+      PATH: '/usr/local/bin:/usr/bin:/bin:/home/claude/.local/bin'
     }
   });
 
@@ -79,9 +82,7 @@ wss.on('connection', (ws) => {
     ptyProcess.kill();
   });
 
-  ptyProcess.write('echo "Welcome to Claude Code Terminal!"\n');
-  ptyProcess.write('echo "Connected to $(hostname) at $(date)"\n');
-  ptyProcess.write('clear\n');
+  ptyProcess.write('source /app/init-claude.sh\n');
 });
 
 server.listen(PORT, '0.0.0.0', () => {
