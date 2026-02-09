@@ -45,7 +45,7 @@ Podemos reemplazar node-pty con una solución basada en exec que no requiere com
 ## Estado Actual
 
 - ✅ Código actualizado con Dockerfile corregido
-- ✅ Configuración dokploy.yaml agregada
+- ✅ Configuración dokploy.yaml agregada  
 - ✅ .nixpacksignore agregado para evitar Nixpacks
 - ✅ Repositorio GitHub actualizado
-- ⏳ Pendiente: Configuración manual en Dokploy
+- ⏳ Pendiente: Cambiar Build Type a Dockerfile en panel Dokploy
